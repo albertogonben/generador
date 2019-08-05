@@ -8,22 +8,22 @@ import org.springframework.stereotype.Service;
 public interface I${name}BL {
 
 	/**
-	 * Get all ${descripion}
+	 * Get all ${descripcion}
 	 */
 	List<${name}BO> getAll();
 	
 	/**
-	 * Add a ${descripion}
+	 * Add a ${descripcion}
 	 */
 	${name}BO add(${name}BO ${nameMIN}Bo);
 
 	/**
-	 * Update a ${descripion}
+	 * Update a ${descripcion}
 	 */
 	${name}BO update(Long closePeriodId, ${name}BO ${nameMIN}Bo);
 
     /**
-     * Delete a ${descripion}
+     * Delete a ${descripcion}
      */
     boolean delete(Long ${nameMIN}Id);
 

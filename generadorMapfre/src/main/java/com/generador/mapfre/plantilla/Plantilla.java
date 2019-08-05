@@ -14,7 +14,6 @@ public class Plantilla {
 	public static void crearController(List<Class> entities) {
 
 		entities.forEach((entity) -> {
-			System.out.println(entity);
 
 			String nombre = Util.getNombre(entity);
 			String nombreMIN = Util.getNombreMIN(entity);
@@ -38,7 +37,6 @@ public class Plantilla {
 	public static void crearControllerString(List<String> entities) {
 
 		entities.forEach((entity) -> {
-			System.out.println(entity);
 
 			String nombre = entity;
 			String nombreMIN = nombre.substring(0, 1).toLowerCase() + nombre.substring(1);
@@ -59,7 +57,7 @@ public class Plantilla {
 
 			Map parametros = new HashMap();
 			parametros.put("name", nombre);
-			parametros.put("nombreMIN", nombreMIN);
+			parametros.put("nameMIN", nombreMIN);
 			parametros.put("package", paquete);
 			parametros.put("descripcion", descripcion);
 			parametros.put("path", path);
@@ -78,7 +76,6 @@ public class Plantilla {
 
 	public static void crearServiceString(List<String> entities) {
 		entities.forEach((entity) -> {
-			System.out.println(entity);
 
 			String nombre = entity;
 			String nombreMIN = nombre.substring(0, 1).toLowerCase() + nombre.substring(1);
@@ -96,7 +93,7 @@ public class Plantilla {
 
 			Map parametros = new HashMap();
 			parametros.put("name", nombre);
-			parametros.put("nombreMIN", nombreMIN);
+			parametros.put("nameMIN", nombreMIN);
 			parametros.put("package", paquete);
 			parametros.put("descripcion", descripcion);
 
@@ -108,7 +105,6 @@ public class Plantilla {
 
 	public static void crearRepositoryString(List<String> entities) {
 		entities.forEach((entity) -> {
-			System.out.println(entity);
 
 			String nombre = entity;
 			String paquete = PACKAGE;

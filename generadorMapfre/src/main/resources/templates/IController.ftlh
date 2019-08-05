@@ -30,9 +30,9 @@ public interface I${name}Controller {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@GetMapping("/${path}")
-	ResponseEntity<List<${beanBO}>> get();
+	ResponseEntity<List<${name}BO>> get();
 
-	@ApiOperation(value = "Add a ${descripcion}", response = ${beanBO}.class)
+	@ApiOperation(value = "Add a ${descripcion}", response = ${name}BO.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully created ${descripcion}"),
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
@@ -40,17 +40,17 @@ public interface I${name}Controller {
 			@ApiResponse(code = 409, message = "The request could not be completed") ,
 			@ApiResponse(code = 500, message = "Internal server error")})
 	@PostMapping("/${path}")
-	ResponseEntity<${beanBO}> add(@Valid @RequestBody ${beanBO} input);
+	ResponseEntity<${name}BO> add(@Valid @RequestBody ${name}BO input);
 
-	@ApiOperation(value = "Update a ${descripcion}", response = ${beanBO}.class)
+	@ApiOperation(value = "Update a ${descripcion}", response = ${name}BO.class)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Successfully updated ${descripcion}"),
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
 			@ApiResponse(code = 500, message = "Internal server error")})
 
-	@PutMapping("/${path}/{${id}}")
-	ResponseEntity<${beanBO}> update(@PathVariable Long ${id}, @Valid @RequestBody ${beanBO} input);
+	@PutMapping("/${path}/{${nameMIN}Id}")
+	ResponseEntity<${name}BO> update(@PathVariable Long ${nameMIN}Id, @Valid @RequestBody ${name}BO input);
 
 	@ApiOperation(value = "Delete a ${descripcion}")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully deleted ${descripcion}"),
@@ -59,7 +59,7 @@ public interface I${name}Controller {
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found") ,
 			@ApiResponse(code = 500, message = "Internal server error")})
 
-	@DeleteMapping("/${path}/{${id}}")
-	ResponseEntity<${beanBO}> delete(@PathVariable Long ${id});
+	@DeleteMapping("/${path}/{${nameMIN}Id}")
+	ResponseEntity<${name}BO> delete(@PathVariable Long ${nameMIN}Id);
 
 }
