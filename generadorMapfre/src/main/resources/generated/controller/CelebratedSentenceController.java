@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mapfre.gaia.amap3.exception.CustomException;
+import com.mapfre.gaia.amap3.validations.ValidationDate;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -25,54 +28,63 @@ public class CelebratedSentenceController implements ICelebratedSentenceControll
 	}
 	
 	@Override
-	public ResponseEntity<List<CelebratedSentenceBO>> get() {
+	public ResponseEntity<List<CelebratedSentenceBO>> get() throws CustomException{
+		log.debug("CelebratedSentenceController:get [START]");
 		try {
+			log.debug("CelebratedSentenceController:get [END]");
 			return ResponseEntity.ok().body(celebratedSentenceBL.getAll());
 		} catch (Exception e) {
-			log.error("CelebratedSentenceController:get", e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
 		}
 	}
 
     @Override
-    public ResponseEntity<CelebratedSentenceBO> add(@Valid @RequestBody CelebratedSentenceBO input) {
+    public ResponseEntity<CelebratedSentenceBO> add(@Valid @RequestBody CelebratedSentenceBO input) throws CustomException{
+    	log.debug("CelebratedSentenceController:add [START]");
     	try {
-			CelebratedSentenceBO celebratedSentenceBo = closePeriodBL.add(input);
-			if (closePeriodBo != null) {
+    		if(ValidationDate.validationStringDate(input.getDateStart()) == false 
+    				|| ValidationDate.validationStringDate(input.getDateFinish()) == false) {
+			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error parseo de fechas de entrada");
+    		}
+    	
+			CelebratedSentenceBO celebratedSentenceBo = celebratedSentenceBL.add(input);
+			if (celebratedSentenceBo != null) {
+				log.debug("CelebratedSentenceController:add [END]");
 				return ResponseEntity.ok().build();
 			}
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			throw new CustomException(HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT.getReasonPhrase());
 		} catch (Exception e) {
-			log.error("ClosePeriodController:add", e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
 		}
     }
 
     @Override
-    public ResponseEntity<ClosePeriodBO> update(@PathVariable Long closePeriodId, @RequestBody ClosePeriodBO input) {
+    public ResponseEntity<CelebratedSentenceBO> update(@PathVariable Long celebratedSentenceId, @RequestBody CelebratedSentenceBO input) throws CustomException{
+    	log.debug("CelebratedSentenceController:update [START]");
     	try {
-			ClosePeriodBO closePeriodBo = closePeriodBL.update(closePeriodId, input);
-			if (closePeriodBo != null) {
-			    return ResponseEntity.ok().body(closePeriodBo);
+			CelebratedSentenceBO celebratedSentenceBo = celebratedSentenceBL.update(celebratedSentenceId, input);
+			if (celebratedSentenceBo != null) {
+				log.debug("CelebratedSentenceController:update [END]");
+			    return ResponseEntity.ok().body(celebratedSentenceBo);
 			}
-			return ResponseEntity.noContent().build();
+			throw new CustomException(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
 		} catch (Exception e) {
-			log.error("ClosePeriodController:update", e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
     }
 
     @Override
-    public ResponseEntity<ClosePeriodBO> delete(@PathVariable Long closePeriodId) {
+    public ResponseEntity<CelebratedSentenceBO> delete(@PathVariable Long celebratedSentenceId) throws CustomException{
+        log.debug("CelebratedSentenceController:delete [START]");
         try {
-			boolean claseoPeriodDeleted = closePeriodBL.delete(closePeriodId);
-			if (claseoPeriodDeleted) {
-			    return ResponseEntity.noContent().build();
+			boolean celebratedSentenceDeleted = celebratedSentenceBL.delete(celebratedSentenceId);
+			if (celebratedSentenceDeleted) {
+				log.debug("CelebratedSentenceController:delete [END]");
+			    return ResponseEntity.ok().build();
 			}
-			return ResponseEntity.notFound().build();
+			throw new CustomException(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
 		} catch (Exception e) {
-			log.error("ClosePeriodController:delete", e);
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
     }
 

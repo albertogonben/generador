@@ -64,6 +64,7 @@ public class CelebratedSentenceBLImpl implements ICelebratedSentenceBL {
 
 	@Override
 	public CelebratedSentenceBO update(Long celebratedSentenceId, CelebratedSentenceBO celebratedSentenceBO) {
+		log.debug("CelebratedSentenceBLImpl:update [START]");
 		CelebratedSentence celebratedSentenceEntity = celebratedSentenceRepository.getOne(celebratedSentenceId);
 		if (celebratedSentenceEntity != null) {
 			
@@ -71,6 +72,7 @@ public class CelebratedSentenceBLImpl implements ICelebratedSentenceBL {
 
 			Util.getDateUser(celebratedSentenceEntity, "UPDATE");
 			
+			log.debug("CelebratedSentenceBLImpl:update [START]");
 			return mapperCelebratedSentence.map(celebratedSentenceRepository.save(celebratedSentenceEntity), CelebratedSentenceBO.class);
 		}
 
@@ -79,6 +81,7 @@ public class CelebratedSentenceBLImpl implements ICelebratedSentenceBL {
 
 	@Override
 	public boolean delete(Long celebratedSentenceId) {
+		log.debug("CelebratedSentenceBLImpl:delete [START]");
 		CelebratedSentence celebratedSentenceEntity = celebratedSentenceRepository.getOne(celebratedSentenceId);
 		if (celebratedSentenceEntity != null) {
 		
@@ -89,6 +92,7 @@ public class CelebratedSentenceBLImpl implements ICelebratedSentenceBL {
 			
 			mapperCelebratedSentence.map(celebratedSentenceRepository.save(celebratedSentenceEntity), CelebratedSentenceBO.class);
 			
+			log.debug("CelebratedSentenceBLImpl:delete [END]");
 			return true;
 		}
 

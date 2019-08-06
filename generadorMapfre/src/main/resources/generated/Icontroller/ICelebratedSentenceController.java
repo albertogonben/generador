@@ -30,7 +30,7 @@ public interface ICelebratedSentenceController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@GetMapping("/celebrated-sentence")
-	ResponseEntity<List<CelebratedSentenceBO>> get();
+	ResponseEntity<List<CelebratedSentenceBO>> get() throws CustomException;
 
 	@ApiOperation(value = "Add a celebrated sentence", response = CelebratedSentenceBO.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully created celebrated sentence"),
@@ -40,7 +40,7 @@ public interface ICelebratedSentenceController {
 			@ApiResponse(code = 409, message = "The request could not be completed") ,
 			@ApiResponse(code = 500, message = "Internal server error")})
 	@PostMapping("/celebrated-sentence")
-	ResponseEntity<CelebratedSentenceBO> add(@Valid @RequestBody CelebratedSentenceBO input);
+	ResponseEntity<CelebratedSentenceBO> add(@Valid @RequestBody CelebratedSentenceBO input) throws CustomException;
 
 	@ApiOperation(value = "Update a celebrated sentence", response = CelebratedSentenceBO.class)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Successfully updated celebrated sentence"),
@@ -50,7 +50,7 @@ public interface ICelebratedSentenceController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@PutMapping("/celebrated-sentence/{celebratedSentenceId}")
-	ResponseEntity<CelebratedSentenceBO> update(@PathVariable Long celebratedSentenceId, @Valid @RequestBody CelebratedSentenceBO input);
+	ResponseEntity<CelebratedSentenceBO> update(@PathVariable Long celebratedSentenceId, @Valid @RequestBody CelebratedSentenceBO input) throws CustomException;
 
 	@ApiOperation(value = "Delete a celebrated sentence")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully deleted celebrated sentence"),
@@ -60,6 +60,6 @@ public interface ICelebratedSentenceController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@DeleteMapping("/celebrated-sentence/{celebratedSentenceId}")
-	ResponseEntity<CelebratedSentenceBO> delete(@PathVariable Long celebratedSentenceId);
+	ResponseEntity<CelebratedSentenceBO> delete(@PathVariable Long celebratedSentenceId) throws CustomException;
 
 }

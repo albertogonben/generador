@@ -30,7 +30,7 @@ public interface INewController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@GetMapping("/new")
-	ResponseEntity<List<NewBO>> get();
+	ResponseEntity<List<NewBO>> get() throws CustomException;
 
 	@ApiOperation(value = "Add a new", response = NewBO.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully created new"),
@@ -40,7 +40,7 @@ public interface INewController {
 			@ApiResponse(code = 409, message = "The request could not be completed") ,
 			@ApiResponse(code = 500, message = "Internal server error")})
 	@PostMapping("/new")
-	ResponseEntity<NewBO> add(@Valid @RequestBody NewBO input);
+	ResponseEntity<NewBO> add(@Valid @RequestBody NewBO input) throws CustomException;
 
 	@ApiOperation(value = "Update a new", response = NewBO.class)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Successfully updated new"),
@@ -50,7 +50,7 @@ public interface INewController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@PutMapping("/new/{newId}")
-	ResponseEntity<NewBO> update(@PathVariable Long newId, @Valid @RequestBody NewBO input);
+	ResponseEntity<NewBO> update(@PathVariable Long newId, @Valid @RequestBody NewBO input) throws CustomException;
 
 	@ApiOperation(value = "Delete a new")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully deleted new"),
@@ -60,6 +60,6 @@ public interface INewController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@DeleteMapping("/new/{newId}")
-	ResponseEntity<NewBO> delete(@PathVariable Long newId);
+	ResponseEntity<NewBO> delete(@PathVariable Long newId) throws CustomException;
 
 }

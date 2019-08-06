@@ -20,7 +20,7 @@ public interface INewBL {
 	/**
 	 * Update a new
 	 */
-	NewBO update(Long closePeriodId, NewBO newBo);
+	NewBO update(Long newId, NewBO newBo);
 
     /**
      * Delete a new

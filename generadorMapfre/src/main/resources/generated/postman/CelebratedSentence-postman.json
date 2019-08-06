@@ -1,18 +1,18 @@
 {
 	"info": {
 		"_postman_id": "7238bd88-9f58-40c5-bc5b-7cdd9c54e037",
-		"name": "Amap3-${name}",
+		"name": "Amap3-CelebratedSentence",
 		"description": "Amap3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "${path}/get",
+			"name": "celebrated-sentence/get",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/amap3_be-web/${path}",
+					"raw": "http://localhost:8080/amap3_be-web/celebrated-sentence",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -20,14 +20,14 @@
 					"port": "8080",
 					"path": [
 						"amap3_be-web",
-						"${path}"
+						"celebrated-sentence"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "${path}/add",
+			"name": "celebrated-sentence/add",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -43,7 +43,7 @@
 					"raw": "{\n    \"dateFinish\": \"21/01/2019\",\n    \"dateStart\": \"21/05/2019\",\n    \"mrkActive\": 1,\n    \"typeClosePeriod\": {\n        \"idTypeClosePeriodPk\": 2\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/amap3_be-web/${path}",
+					"raw": "http://localhost:8080/amap3_be-web/celebrated-sentence",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -51,14 +51,14 @@
 					"port": "8080",
 					"path": [
 						"amap3_be-web",
-						"${path}"
+						"celebrated-sentence"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "${path}/update",
+			"name": "celebrated-sentence/update",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -74,7 +74,7 @@
 					"raw": "{}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/amap3_be-web/${path}/100",
+					"raw": "http://localhost:8080/amap3_be-web/celebrated-sentence/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -82,7 +82,7 @@
 					"port": "8080",
 					"path": [
 						"amap3_be-web",
-						"${path}",
+						"celebrated-sentence",
 						"100"
 					]
 				}
@@ -90,12 +90,12 @@
 			"response": []
 		},
 		{
-			"name": "${path}/delete",
+			"name": "celebrated-sentence/delete",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/amap3_be-web/${path}/100",
+					"raw": "http://localhost:8080/amap3_be-web/celebrated-sentence/100",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -103,7 +103,7 @@
 					"port": "8080",
 					"path": [
 						"amap3_be-web",
-						"${path}",
+						"celebrated-sentence",
 						"100"
 					]
 				}

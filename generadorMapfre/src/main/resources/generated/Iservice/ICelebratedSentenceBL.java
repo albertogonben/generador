@@ -20,7 +20,7 @@ public interface ICelebratedSentenceBL {
 	/**
 	 * Update a celebrated sentence
 	 */
-	CelebratedSentenceBO update(Long closePeriodId, CelebratedSentenceBO celebratedSentenceBo);
+	CelebratedSentenceBO update(Long celebratedSentenceId, CelebratedSentenceBO celebratedSentenceBo);
 
     /**
      * Delete a celebrated sentence

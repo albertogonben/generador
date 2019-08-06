@@ -64,6 +64,7 @@ public class NewBLImpl implements INewBL {
 
 	@Override
 	public NewBO update(Long newId, NewBO newBO) {
+		log.debug("NewBLImpl:update [START]");
 		New newEntity = newRepository.getOne(newId);
 		if (newEntity != null) {
 			
@@ -71,6 +72,7 @@ public class NewBLImpl implements INewBL {
 
 			Util.getDateUser(newEntity, "UPDATE");
 			
+			log.debug("NewBLImpl:update [START]");
 			return mapperNew.map(newRepository.save(newEntity), NewBO.class);
 		}
 
@@ -79,6 +81,7 @@ public class NewBLImpl implements INewBL {
 
 	@Override
 	public boolean delete(Long newId) {
+		log.debug("NewBLImpl:delete [START]");
 		New newEntity = newRepository.getOne(newId);
 		if (newEntity != null) {
 		
@@ -89,6 +92,7 @@ public class NewBLImpl implements INewBL {
 			
 			mapperNew.map(newRepository.save(newEntity), NewBO.class);
 			
+			log.debug("NewBLImpl:delete [END]");
 			return true;
 		}
 

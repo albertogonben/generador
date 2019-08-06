@@ -28,13 +28,13 @@ public class Plantilla {
 			parametros.put("descripcion", descripcion);
 			parametros.put("path", path);
 
-			Generador.generar("C", parametros);
+			Generador.generar("C", parametros, "");
 
 		});
 
 	}
 
-	public static void crearControllerString(List<String> entities) {
+	public static void crearControllerString(List<String> entities, String pathDestino) {
 
 		entities.forEach((entity) -> {
 
@@ -62,7 +62,7 @@ public class Plantilla {
 			parametros.put("descripcion", descripcion);
 			parametros.put("path", path);
 
-			Generador.generar("C", parametros);
+			Generador.generar("C", parametros, pathDestino);
 
 		});
 
@@ -74,7 +74,7 @@ public class Plantilla {
 
 	}
 
-	public static void crearServiceString(List<String> entities) {
+	public static void crearServiceString(List<String> entities, String pathDestino) {
 		entities.forEach((entity) -> {
 
 			String nombre = entity;
@@ -97,13 +97,13 @@ public class Plantilla {
 			parametros.put("package", paquete);
 			parametros.put("descripcion", descripcion);
 
-			Generador.generar("S", parametros);
+			Generador.generar("S", parametros, pathDestino);
 
 		});
 
 	}
 
-	public static void crearRepositoryString(List<String> entities) {
+	public static void crearRepositoryString(List<String> entities, String pathDestino) {
 		entities.forEach((entity) -> {
 
 			String nombre = entity;
@@ -113,7 +113,32 @@ public class Plantilla {
 			parametros.put("name", nombre);
 			parametros.put("package", paquete);
 
-			Generador.generar("R", parametros);
+			Generador.generar("R", parametros, pathDestino);
+
+		});
+
+	}
+
+	public static void crearPostman(List<String> entities, String pathDestino) {
+		entities.forEach((entity) -> {
+
+			String nombre = entity;
+			String[] nombreSeparado = separarNombre(nombre);
+
+			String path = "";
+			for (int i = 0; i < nombreSeparado.length; i++) {
+				if (i == 0) {
+					path += nombreSeparado[i].toLowerCase();
+				} else {
+					path += "-" + nombreSeparado[i].toLowerCase();
+				}
+			}
+
+			Map parametros = new HashMap();
+			parametros.put("name", nombre);
+			parametros.put("path", path);
+
+			Generador.generar("P", parametros, pathDestino);
 
 		});
 

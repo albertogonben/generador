@@ -64,6 +64,7 @@ public class ClosePeriodBLImpl implements IClosePeriodBL {
 
 	@Override
 	public ClosePeriodBO update(Long closePeriodId, ClosePeriodBO closePeriodBO) {
+		log.debug("ClosePeriodBLImpl:update [START]");
 		ClosePeriod closePeriodEntity = closePeriodRepository.getOne(closePeriodId);
 		if (closePeriodEntity != null) {
 			
@@ -71,6 +72,7 @@ public class ClosePeriodBLImpl implements IClosePeriodBL {
 
 			Util.getDateUser(closePeriodEntity, "UPDATE");
 			
+			log.debug("ClosePeriodBLImpl:update [START]");
 			return mapperClosePeriod.map(closePeriodRepository.save(closePeriodEntity), ClosePeriodBO.class);
 		}
 
@@ -79,6 +81,7 @@ public class ClosePeriodBLImpl implements IClosePeriodBL {
 
 	@Override
 	public boolean delete(Long closePeriodId) {
+		log.debug("ClosePeriodBLImpl:delete [START]");
 		ClosePeriod closePeriodEntity = closePeriodRepository.getOne(closePeriodId);
 		if (closePeriodEntity != null) {
 		
@@ -89,6 +92,7 @@ public class ClosePeriodBLImpl implements IClosePeriodBL {
 			
 			mapperClosePeriod.map(closePeriodRepository.save(closePeriodEntity), ClosePeriodBO.class);
 			
+			log.debug("ClosePeriodBLImpl:delete [END]");
 			return true;
 		}
 

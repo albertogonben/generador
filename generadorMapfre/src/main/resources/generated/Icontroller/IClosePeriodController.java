@@ -30,7 +30,7 @@ public interface IClosePeriodController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@GetMapping("/close-period")
-	ResponseEntity<List<ClosePeriodBO>> get();
+	ResponseEntity<List<ClosePeriodBO>> get() throws CustomException;
 
 	@ApiOperation(value = "Add a close period", response = ClosePeriodBO.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully created close period"),
@@ -40,7 +40,7 @@ public interface IClosePeriodController {
 			@ApiResponse(code = 409, message = "The request could not be completed") ,
 			@ApiResponse(code = 500, message = "Internal server error")})
 	@PostMapping("/close-period")
-	ResponseEntity<ClosePeriodBO> add(@Valid @RequestBody ClosePeriodBO input);
+	ResponseEntity<ClosePeriodBO> add(@Valid @RequestBody ClosePeriodBO input) throws CustomException;
 
 	@ApiOperation(value = "Update a close period", response = ClosePeriodBO.class)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Successfully updated close period"),
@@ -50,7 +50,7 @@ public interface IClosePeriodController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@PutMapping("/close-period/{closePeriodId}")
-	ResponseEntity<ClosePeriodBO> update(@PathVariable Long closePeriodId, @Valid @RequestBody ClosePeriodBO input);
+	ResponseEntity<ClosePeriodBO> update(@PathVariable Long closePeriodId, @Valid @RequestBody ClosePeriodBO input) throws CustomException;
 
 	@ApiOperation(value = "Delete a close period")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully deleted close period"),
@@ -60,6 +60,6 @@ public interface IClosePeriodController {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@DeleteMapping("/close-period/{closePeriodId}")
-	ResponseEntity<ClosePeriodBO> delete(@PathVariable Long closePeriodId);
+	ResponseEntity<ClosePeriodBO> delete(@PathVariable Long closePeriodId) throws CustomException;
 
 }

@@ -2,7 +2,6 @@ package com.generador.mapfre.generador;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Map;
 
@@ -22,8 +21,14 @@ public class Generador {
 
 	private static String PLANTILLA_IREPOSITORY = "Repository.ftlh";
 
-	public static void generar(String tipo, Map parametros) {
+	private static String PLANTILLA_POSTMAN = "postman.ftlh";
 
+	public static String PATH_DESTINO = "";
+	
+	public static void generar(String tipo, Map parametros, String pathDestino) {
+
+		PATH_DESTINO = pathDestino;
+		
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_27);
 		try {
 			cfg.setDirectoryForTemplateLoading(new File("src/main/resources/templates"));
@@ -42,6 +47,9 @@ public class Generador {
 			case "R":
 				generarRepository(cfg, parametros);
 				break;
+			case "P":
+				generarPostman(cfg, parametros);
+				break;
 			default:
 				break;
 			}
@@ -51,42 +59,58 @@ public class Generador {
 		}
 	}
 
+	private static void generarPostman(Configuration cfg, Map parametros) throws Exception {
+		
+		new File(PATH_DESTINO+"/postman").mkdir();
+
+//		Postman
+		Template tempIRepository = cfg.getTemplate(PLANTILLA_POSTMAN);
+
+		File newFile = new File(
+				PATH_DESTINO+"/postman/" + parametros.get("name") + "-postman.json");
+		newFile.createNewFile();
+		Writer file = new FileWriter(newFile);
+		tempIRepository.process(parametros, file);
+
+	}
+
 	private static void generarRepository(Configuration cfg, Map parametros) throws Exception {
-		
-		new File("src/main/resources/generated/Repository").mkdir();
-		
+
+		new File(PATH_DESTINO+"/Repository").mkdir();
+
 //		IRepository
 		Template tempIRepository = cfg.getTemplate(PLANTILLA_IREPOSITORY);
 //		Writer outIRepository = new OutputStreamWriter(System.out);
 //		tempIRepository.process(parametros, outIRepository);		
-		
-		File newFile = new File("src/main/resources/generated/Repository/" + parametros.get("name") + "Repository.java");
+
+		File newFile = new File(
+				PATH_DESTINO+"/Repository/" + parametros.get("name") + "Repository.java");
 		newFile.createNewFile();
 		Writer file = new FileWriter(newFile);
 		tempIRepository.process(parametros, file);
 	}
 
 	private static void generarService(Configuration cfg, Map parametros) throws Exception {
-		
-		new File("src/main/resources/generated/Iservice").mkdir();
-		new File("src/main/resources/generated/service").mkdir();
-		
+
+		new File(PATH_DESTINO+"/Iservice").mkdir();
+		new File(PATH_DESTINO+"/service").mkdir();
+
 //		IService
 		Template tempIService = cfg.getTemplate(PLANTILLA_ISERVICE);
 //		Writer outIService = new OutputStreamWriter(System.out);
 //		tempIService.process(parametros, outIService);
 
-		File newFile = new File("src/main/resources/generated/Iservice/I" + parametros.get("name") + "BL.java");
+		File newFile = new File(PATH_DESTINO+"/Iservice/I" + parametros.get("name") + "BL.java");
 		newFile.createNewFile();
 		Writer file = new FileWriter(newFile);
 		tempIService.process(parametros, file);
-		
+
 //		Service
 		Template tempService = cfg.getTemplate(PLANTILLA_SERVICE);
 //		Writer outService = new OutputStreamWriter(System.out);
 //		tempService.process(parametros, outService);
-		
-		newFile = new File("src/main/resources/generated/service/" + parametros.get("name") + "BLImpl.java");
+
+		newFile = new File(PATH_DESTINO+"/service/" + parametros.get("name") + "BLImpl.java");
 		newFile.createNewFile();
 		file = new FileWriter(newFile);
 		tempService.process(parametros, file);
@@ -95,30 +119,30 @@ public class Generador {
 
 	private static void generarController(Configuration cfg, Map parametros) throws Exception {
 
-		new File("src/main/resources/generated").mkdir();
-		new File("src/main/resources/generated/Icontroller").mkdir();
-		new File("src/main/resources/generated/controller").mkdir();
-		
+		new File(PATH_DESTINO+"/Icontroller").mkdir();
+		new File(PATH_DESTINO+"/controller").mkdir();
+
 //		IControler
 		Template tempIControler = cfg.getTemplate(PLANTILLA_ICONTROLLER);
 //		Writer outIControler = new OutputStreamWriter(System.out);
 //		tempIControler.process(parametros, outIControler);
 
-		File newFile = new File("src/main/resources/generated/Icontroller/I" + parametros.get("name") + "Controller.java");
+		File newFile = new File(
+				PATH_DESTINO+"/Icontroller/I" + parametros.get("name") + "Controller.java");
 		newFile.createNewFile();
 		Writer file = new FileWriter(newFile);
 		tempIControler.process(parametros, file);
-		
+
 //		Controller
 		Template tempController = cfg.getTemplate(PLANTILLA_CONTROLLER);
 //		Writer outController = new OutputStreamWriter(System.out);
 //		tempController.process(parametros, outController);
 
-		newFile = new File("src/main/resources/generated/controller/" + parametros.get("name") + "Controller.java");
+		newFile = new File(PATH_DESTINO+"/controller/" + parametros.get("name") + "Controller.java");
 		newFile.createNewFile();
 		file = new FileWriter(newFile);
 		tempController.process(parametros, file);
-		
+
 	}
 
 }
