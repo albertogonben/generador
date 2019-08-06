@@ -13,9 +13,11 @@ public class GeneradorMainJava {
 		
 		List<String> clases = Input.obtenerEntitiesString(PATH);
 		
-		Plantilla.crearControllerString(clases);
-		Plantilla.crearServiceString(clases);
-		Plantilla.crearRepositoryString(clases);
+		if (clases.size() > 0) {
+			Plantilla.crearControllerString(clases);
+			Plantilla.crearServiceString(clases);
+			Plantilla.crearRepositoryString(clases);
+		}
 		
 	}
 	

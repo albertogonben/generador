@@ -20,7 +20,7 @@ public interface I${name}BL {
 	/**
 	 * Update a ${descripcion}
 	 */
-	${name}BO update(Long closePeriodId, ${name}BO ${nameMIN}Bo);
+	${name}BO update(Long ${nameMIN}Id, ${name}BO ${nameMIN}Bo);
 
     /**
      * Delete a ${descripcion}

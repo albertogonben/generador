@@ -64,6 +64,7 @@ public class ${name}BLImpl implements I${name}BL {
 
 	@Override
 	public ${name}BO update(Long ${nameMIN}Id, ${name}BO ${nameMIN}BO) {
+		log.debug("${name}BLImpl:update [START]");
 		${name} ${nameMIN}Entity = ${nameMIN}Repository.getOne(${nameMIN}Id);
 		if (${nameMIN}Entity != null) {
 			
@@ -71,6 +72,7 @@ public class ${name}BLImpl implements I${name}BL {
 
 			Util.getDateUser(${nameMIN}Entity, "UPDATE");
 			
+			log.debug("${name}BLImpl:update [START]");
 			return mapper${name}.map(${nameMIN}Repository.save(${nameMIN}Entity), ${name}BO.class);
 		}
 
@@ -79,6 +81,7 @@ public class ${name}BLImpl implements I${name}BL {
 
 	@Override
 	public boolean delete(Long ${nameMIN}Id) {
+		log.debug("${name}BLImpl:delete [START]");
 		${name} ${nameMIN}Entity = ${nameMIN}Repository.getOne(${nameMIN}Id);
 		if (${nameMIN}Entity != null) {
 		
@@ -89,6 +92,7 @@ public class ${name}BLImpl implements I${name}BL {
 			
 			mapper${name}.map(${nameMIN}Repository.save(${nameMIN}Entity), ${name}BO.class);
 			
+			log.debug("${name}BLImpl:delete [END]");
 			return true;
 		}
 

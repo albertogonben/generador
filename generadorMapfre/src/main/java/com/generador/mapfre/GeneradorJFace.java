@@ -15,11 +15,15 @@ public class GeneradorJFace {
 		dirDialog.setText("Seleccionar el directorio de entities");
 		String selectedDir = dirDialog.open();
 
-		List<String> clases = Input.obtenerEntitiesString(selectedDir);
+		if (selectedDir != null && selectedDir != "") {
+			List<String> clases = Input.obtenerEntitiesString(selectedDir);
 
-		Plantilla.crearControllerString(clases);
-		Plantilla.crearServiceString(clases);
-		Plantilla.crearRepositoryString(clases);
+			if (clases.size() > 0) {
+				Plantilla.crearControllerString(clases);
+				Plantilla.crearServiceString(clases);
+				Plantilla.crearRepositoryString(clases);
+			}
+		}
 
 	}
 

@@ -30,7 +30,7 @@ public interface I${name}Controller {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@GetMapping("/${path}")
-	ResponseEntity<List<${name}BO>> get();
+	ResponseEntity<List<${name}BO>> get() throws CustomException;
 
 	@ApiOperation(value = "Add a ${descripcion}", response = ${name}BO.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully created ${descripcion}"),
@@ -40,7 +40,7 @@ public interface I${name}Controller {
 			@ApiResponse(code = 409, message = "The request could not be completed") ,
 			@ApiResponse(code = 500, message = "Internal server error")})
 	@PostMapping("/${path}")
-	ResponseEntity<${name}BO> add(@Valid @RequestBody ${name}BO input);
+	ResponseEntity<${name}BO> add(@Valid @RequestBody ${name}BO input) throws CustomException;
 
 	@ApiOperation(value = "Update a ${descripcion}", response = ${name}BO.class)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Successfully updated ${descripcion}"),
@@ -50,7 +50,7 @@ public interface I${name}Controller {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@PutMapping("/${path}/{${nameMIN}Id}")
-	ResponseEntity<${name}BO> update(@PathVariable Long ${nameMIN}Id, @Valid @RequestBody ${name}BO input);
+	ResponseEntity<${name}BO> update(@PathVariable Long ${nameMIN}Id, @Valid @RequestBody ${name}BO input) throws CustomException;
 
 	@ApiOperation(value = "Delete a ${descripcion}")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successfully deleted ${descripcion}"),
@@ -60,6 +60,6 @@ public interface I${name}Controller {
 			@ApiResponse(code = 500, message = "Internal server error")})
 
 	@DeleteMapping("/${path}/{${nameMIN}Id}")
-	ResponseEntity<${name}BO> delete(@PathVariable Long ${nameMIN}Id);
+	ResponseEntity<${name}BO> delete(@PathVariable Long ${nameMIN}Id) throws CustomException;
 
 }
