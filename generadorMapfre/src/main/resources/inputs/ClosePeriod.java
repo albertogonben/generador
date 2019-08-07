@@ -50,7 +50,7 @@ public class ClosePeriod implements Serializable {
 	//uni-directional many-to-one association to TypeClosePeriod
 	@ManyToOne
 	@JoinColumn(name="ID_TYPE_CLOSE_PERIOD_FK")
-	private TypeClosePeriod typeClosePeriod;
+	private New typeClosePeriod;
 
 	public ClosePeriod() {
 	}
@@ -119,11 +119,11 @@ public class ClosePeriod implements Serializable {
 		this.userUpdate = userUpdate;
 	}
 
-	public TypeClosePeriod getTypeClosePeriod() {
+	public New getTypeClosePeriod() {
 		return this.typeClosePeriod;
 	}
 
-	public void setTypeClosePeriod(TypeClosePeriod typeClosePeriod) {
+	public void setTypeClosePeriod(New typeClosePeriod) {
 		this.typeClosePeriod = typeClosePeriod;
 	}
 

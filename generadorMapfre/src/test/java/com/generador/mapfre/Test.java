@@ -1,13 +1,20 @@
 package com.generador.mapfre;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
-import org.eclipse.core.resources.ResourcesPlugin;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.List;
+
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.swt.widgets.DirectoryDialog;
-import org.eclipse.swt.widgets.Shell;
+import org.graalvm.compiler.core.common.Fields;
+
+import com.generador.mapfre.entrada.Input;
 
 public class Test {
+	
+	private static String PATH = "src/main/resources/inputs";
+	
 	public static void main(String[] args) throws CoreException {
 
 //		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject("Test");
@@ -23,12 +30,24 @@ public class Test {
 //				project.open(null);
 //			}
 //		}
-		
-		
-		DirectoryDialog dirDialog = new DirectoryDialog(new Shell());
-        dirDialog.setText("Select your home directory");
-        String selectedDir = dirDialog.open();
-        System.out.println(selectedDir);
 
+//		DirectoryDialog dirDialog = new DirectoryDialog(new Shell());
+//		dirDialog.setText("Select your home directory");
+//		String selectedDir = dirDialog.open();
+//		System.out.println(selectedDir);
+		
+		List<Class> clases = Input.obtenerEntities(PATH);
+
+		clases.forEach((clase)-> {
+			System.out.println(clase.getName());
+			for (Field f : clase.getDeclaredFields()) {
+				System.out.println(Modifier.toString(f.getModifiers())+" "+f.getGenericType().getTypeName()+" "+f.getName());
+			}
+
+		});
+		
 	}
+
+	
+
 }
