@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mapfre.gaia.amap3.exception.CustomException;
-import com.mapfre.gaia.amap3.validations.ValidationDate;
+import com.mapfre.gaia.amap3.validations.Validation;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +34,7 @@ public class ${name}Controller implements I${name}Controller{
 			log.debug("${name}Controller:get [END]");
 			return ResponseEntity.ok().body(${nameMIN}BL.getAll());
 		} catch (Exception e) {
-			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
+			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
 	}
 
@@ -42,9 +42,8 @@ public class ${name}Controller implements I${name}Controller{
     public ResponseEntity<${name}BO> add(@Valid @RequestBody ${name}BO input) throws CustomException{
     	log.debug("${name}Controller:add [START]");
     	try {
-    		if(ValidationDate.validationStringDate(input.getDateStart()) == false 
-    				|| ValidationDate.validationStringDate(input.getDateFinish()) == false) {
-			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error parseo de fechas de entrada");
+    		if(!Validation.validar(input)) {
+    			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
     		}
     	
 			${name}BO ${nameMIN}Bo = ${nameMIN}BL.add(input);
@@ -62,6 +61,9 @@ public class ${name}Controller implements I${name}Controller{
     public ResponseEntity<${name}BO> update(@PathVariable Long ${nameMIN}Id, @RequestBody ${name}BO input) throws CustomException{
     	log.debug("${name}Controller:update [START]");
     	try {
+    		if(!Validation.validar(input)) {
+    			throw new CustomException(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+    		}
 			${name}BO ${nameMIN}Bo = ${nameMIN}BL.update(${nameMIN}Id, input);
 			if (${nameMIN}Bo != null) {
 				log.debug("${name}Controller:update [END]");

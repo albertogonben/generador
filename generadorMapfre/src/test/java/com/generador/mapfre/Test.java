@@ -1,19 +1,18 @@
 package com.generador.mapfre;
 
-import java.io.File;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
-import org.graalvm.compiler.core.common.Fields;
 
 import com.generador.mapfre.entrada.Input;
+import com.generador.mapfre.plantilla.PlantillaClass;
 
 public class Test {
 	
 	private static String PATH = "src/main/resources/inputs";
+	private static String PATH_DESTINO = "src/main/resources";
 	
 	public static void main(String[] args) throws CoreException {
 
@@ -38,14 +37,8 @@ public class Test {
 		
 		List<Class> clases = Input.obtenerEntities(PATH);
 
-		clases.forEach((clase)-> {
-			System.out.println(clase.getName());
-			for (Field f : clase.getDeclaredFields()) {
-				System.out.println(Modifier.toString(f.getModifiers())+" "+f.getGenericType().getTypeName()+" "+f.getName());
-			}
-
-		});
-		
+		PlantillaClass.crear("B", clases, PATH_DESTINO);
+				
 	}
 
 	

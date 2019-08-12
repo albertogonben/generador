@@ -86,8 +86,8 @@ public class ${name}BLImpl implements I${name}BL {
 		if (${nameMIN}Entity != null) {
 		
 			//TODO Baja logica o fisica?
-		
-			${nameMIN}Entity.setMrkActive(new BigDecimal(0));
+			//${nameMIN}Entity.setMrkActive(new BigDecimal(0));
+			
 			Util.getDateUser(${nameMIN}Entity, "UPDATE");
 			
 			mapper${name}.map(${nameMIN}Repository.save(${nameMIN}Entity), ${name}BO.class);

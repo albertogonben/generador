@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import com.generador.mapfre.entrada.Input;
-import com.generador.mapfre.plantilla.Plantilla;
+import com.generador.mapfre.plantilla.PlantillaClass;
 
 public class GeneradorJFace {
 
@@ -22,13 +22,14 @@ public class GeneradorJFace {
 			String selectedDest = destDialog.open();
 
 			if (selectedDest != null && selectedDir != "") {
-				List<String> clases = Input.obtenerEntitiesString(selectedDir);
+				List<Class> clases = Input.obtenerEntities(selectedDir);
 
 				if (clases.size() > 0) {
-					Plantilla.crearControllerString(clases, selectedDest);
-					Plantilla.crearServiceString(clases, selectedDest);
-					Plantilla.crearRepositoryString(clases, selectedDest);
-					Plantilla.crearPostman(clases, selectedDest);
+					PlantillaClass.crear("C", clases, selectedDest);
+					PlantillaClass.crear("S", clases, selectedDest);
+					PlantillaClass.crear("R", clases, selectedDest);
+					PlantillaClass.crear("P", clases, selectedDest);
+					PlantillaClass.crear("B", clases, selectedDest);
 				}
 			}
 

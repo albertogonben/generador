@@ -3,7 +3,7 @@ package com.generador.mapfre;
 import java.util.List;
 
 import com.generador.mapfre.entrada.Input;
-import com.generador.mapfre.plantilla.Plantilla;
+import com.generador.mapfre.plantilla.PlantillaString;
 
 public class GeneradorMainJava {
 
@@ -16,10 +16,10 @@ public class GeneradorMainJava {
 		List<String> clases = Input.obtenerEntitiesString(PATH);
 		
 		if (clases.size() > 0) {
-			Plantilla.crearControllerString(clases,PATH_DESTINO);
-			Plantilla.crearServiceString(clases,PATH_DESTINO);
-			Plantilla.crearRepositoryString(clases,PATH_DESTINO);
-			Plantilla.crearPostman(clases,PATH_DESTINO);
+			PlantillaString.crearControllerString(clases,PATH_DESTINO);
+			PlantillaString.crearServiceString(clases,PATH_DESTINO);
+			PlantillaString.crearRepositoryString(clases,PATH_DESTINO);
+			PlantillaString.crearPostman(clases,PATH_DESTINO);
 		}
 		
 	}
