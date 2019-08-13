@@ -18,7 +18,7 @@ public class Util {
 	}
 
 	public static String getNombreMIN(Class entity) {
-		return entity.getName().substring(0, 1).toLowerCase() + entity.getName().substring(1);
+		return entity.getSimpleName().substring(0, 1).toLowerCase() + entity.getSimpleName().substring(1);
 	}
 
 	public static String getPaquete(Class entity) {
@@ -26,7 +26,7 @@ public class Util {
 	}
 
 	public static String getDescripcion(Class entity) {
-		String[] nombreSeparado = separarNombre(entity.getName());
+		String[] nombreSeparado = separarNombre(entity.getSimpleName());
 		String descripcion = "";
 		for (int i = 0; i < nombreSeparado.length; i++) {
 			if (i == 0) {
@@ -44,7 +44,7 @@ public class Util {
 	}
 
 	public static String getPath(Class entity) {
-		String[] nombreSeparado = separarNombre(entity.getName());
+		String[] nombreSeparado = separarNombre(entity.getSimpleName());
 		String path = "";
 		for (int i = 0; i < nombreSeparado.length; i++) {
 			if (i == 0) {
@@ -68,6 +68,7 @@ public class Util {
 			atributtes.add(new Atributo(Modifier.toString(atr.getModifiers()), atr.getGenericType().getTypeName(),
 					atr.getName()));
 		}
+		
 		return atributtes;
 	}
 

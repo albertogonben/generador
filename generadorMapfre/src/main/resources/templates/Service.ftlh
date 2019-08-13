@@ -70,6 +70,8 @@ public class ${name}BLImpl implements I${name}BL {
 			
 			// TODO Setear campos
 
+			
+
 			Util.getDateUser(${nameMIN}Entity, "UPDATE");
 			
 			log.debug("${name}BLImpl:update [START]");

@@ -63,13 +63,15 @@ public class PlantillaClass {
 			String nombreMIN = Util.getNombreMIN(entity);
 			String paquete = Util.getPaquete(entity);
 			String descripcion = Util.getDescripcion(entity);
-
-			Map<String, String> parametros = new HashMap<String, String>();
+			List<Atributo> parameters = Util.getAtributtes(entity);
+			
+			Map parametros = new HashMap<String, String>();
 			parametros.put("name", nombre);
 			parametros.put("nameMIN", nombreMIN);
 			parametros.put("package", paquete);
 			parametros.put("descripcion", descripcion);
-
+			parametros.put("parameters", parameters);
+			
 			Generador.generar("S", parametros, pathDestino);
 
 		});

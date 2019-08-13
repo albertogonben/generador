@@ -10,9 +10,12 @@ import java.util.stream.Collectors;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
+import javax.tools.StandardLocation;
 import javax.tools.ToolProvider;
 
 import org.eclipse.core.runtime.Path;
+
+import com.generador.mapfre.GeneradorJFace;
 
 public class Input {
 
@@ -48,7 +51,7 @@ public class Input {
 			if (f.isFile() && f.getName().contains(".java")) {
 
 				String name = f.getName().replace(".java", "");
-				Class<?> myClass = Thread.currentThread().getContextClassLoader().loadClass(PATH_LOADER + name);
+				Class<?> myClass = Thread.currentThread().getContextClassLoader().loadClass(PATH_LOADER+name);
 
 				clases.add(myClass);
 
@@ -119,6 +122,9 @@ public class Input {
 
 			List<String> optionList = new ArrayList<String>();
 			optionList.addAll(Arrays.asList("-classpath", System.getProperty("java.class.path")));
+
+			fileManager.setLocation(StandardLocation.CLASS_OUTPUT, Arrays.asList(dest.toFile()));
+			fileManager.setLocation(StandardLocation.CLASS_PATH, Arrays.asList(dest.toFile()));
 
 			JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, null, optionList, null,
 					compilationUnits);
